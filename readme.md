@@ -5,16 +5,13 @@ LaraEventTickets admin area is all generated with __QuickAdminPanel__, front-end
 
 There is Stripe integrated into the system for payments, don't forget to configure your __.env__ file by addind STRIPE_KEY and STRIPE_SECRET (see __.env.example__ file).
 
-## Clickable live-demo
 
-[demo-eventtickets.quickadminpanel.com](http://demo-eventtickets.quickadminpanel.com)
+
 
 - __Email__: admin@admin.com
 - __Pass__: password
 
-![LaraEventTickets screenshot](https://quickadminpanel.com/assets/pages/demos/demo-eventtickets-01.png)
 
-![LaraEventTickets screenshot2](https://quickadminpanel.com/assets/pages/demos/demo-eventtickets-02.png)
 
 ## How to use
 
@@ -31,14 +28,7 @@ Basically, feel free to use and re-use any way you want.
 
 ### Credits
 
-This project is created by [David Lun](https://github.com/mc0de/).
+This project is Adopted from [David Lun](https://github.com/mc0de/).
 
 ---
 
-## More from our LaravelDaily Team
-
-- Read our [Daily Blog with Laravel Tutorials](https://laraveldaily.com)
-- FREE E-book: [50 Laravel Quick Tips (and counting)](https://laraveldaily.com/free-e-book-40-laravel-quick-tips-and-counting/)
-- Check out our adminpanel generator QuickAdminPanel: [Laravel version](https://quickadminpanel.com) and [Vue.js version](https://vue.quickadminpanel.com)
-- Subscribe to our [YouTube channel Laravel Business](https://www.youtube.com/channel/UCTuplgOBi6tJIlesIboymGA)
-- Enroll in our [Laravel Online Courses](https://laraveldaily.teachable.com/)
