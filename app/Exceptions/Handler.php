@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Exceptions;
-
+use Throwable;
+use Illuminate\Support\Reflector;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -30,9 +31,42 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $e)
     {
-        parent::report($exception);
+        $e = $this->mapException($e);
+
+        if ($this->shouldntReport($e)) {
+            return;
+        }
+
+        if (Reflector::isCallable($reportCallable = [$e, 'report'])) {
+            if ($this->container->call($reportCallable) !== false) {
+                return;
+            }
+        }
+
+        foreach ($this->reportCallbacks as $reportCallback) {
+            if ($reportCallback->handles($e)) {
+                if ($reportCallback($e) === false) {
+                    return;
+                }
+            }
+        }
+
+        try {
+            $logger = $this->container->make(LoggerInterface::class);
+        } catch (Exception $ex) {
+            throw $e;
+        }
+
+        $logger->error(
+            $e->getMessage(),
+            array_merge(
+                $this->exceptionContext($e),
+                $this->context(),
+                ['exception' => $e]
+            )
+        );
     }
 
     /**
@@ -42,9 +76,37 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $e)
     {
-        return parent::render($request, $exception);
+        if (method_exists($e, 'render') && $response = $e->render($request)) {
+            return Router::toResponse($request, $response);
+        } elseif ($e instanceof Responsable) {
+            return $e->toResponse($request);
+        }
+
+        $e = $this->prepareException($this->mapException($e));
+
+        foreach ($this->renderCallbacks as $renderCallback) {
+            if (is_a($e, $this->firstClosureParameterType($renderCallback))) {
+                $response = $renderCallback($e, $request);
+
+                if (! is_null($response)) {
+                    return $response;
+                }
+            }
+        }
+
+        if ($e instanceof HttpResponseException) {
+            return $e->getResponse();
+        } elseif ($e instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $e);
+        } elseif ($e instanceof ValidationException) {
+            return $this->convertValidationExceptionToResponse($e, $request);
+        }
+
+        return $request->expectsJson()
+                    ? $this->prepareJsonResponse($request, $e)
+                    : $this->prepareResponse($request, $e);
     }
 
     /**

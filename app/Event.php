@@ -18,8 +18,8 @@ class Event extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'start_time', 'venue'];
-    
+    protected $fillable = ['title', 'description', 'start_time', 'venue', 'image_path'];
+
 
     /**
      * Set attribute to date format

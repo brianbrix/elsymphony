@@ -14,16 +14,54 @@ use App\Http\Requests\Admin\UpdateEventsRequest;
 class EventsController extends Controller
 {
     /**
-     * Display a listing of Event.
+     * Display the Home page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $events = Event::all();
+        $events =Event::simplePaginate(1);
 
-        return view('guest.home', compact('events'));
+        return view('guest.index', compact('events'));
     }
+    public function fetch_data(Request $request)
+    {
+    if ($request->ajax())
+    {
+    $events = Event::simplePaginate(1);
+    return view('guest.events', compact('events'))->render();
+    }
+    }
+
+//     public function login()
+//      {
+//      return view('guest.login')
+//      }
+
+    /**
+     *
+     *
+     * @return about us
+     */
+    public function about()
+    {
+
+        return view('guest.about');
+    }
+
+    /**
+         *
+         *
+         * @return playlist page
+         */
+        public function playlist()
+        {
+
+
+            return view('guest.playlist');
+        }
+
+
 
     /**
      * Display Event.

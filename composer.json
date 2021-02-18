@@ -1,23 +1,27 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
-    "type": "project",
+    "name": "brianbrix/elsymphony",
+    "authors": [
+        {
+            "name": "brianbrix",
+            "email": "mokandubria@gmail.com"
+        }
+    ],
     "require": {
-        "php": ">=5.6.4",
-        "doctrine/dbal": "^2.5",
+        "php": "^8.0",
+        "doctrine/dbal": "^3.0",
         "intervention/image": "^2.3",
-        "laravel/cashier": "~7.0",
-        "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.3",
+        "laravel/cashier": "^12.8",
+        "laravel/framework": "^8.28",
+        "laravel/tinker": "^2.6",
+        "laravel/ui": "^3.2",
+        "laravelcollective/html": "^6.2",
         "unisharp/laravel-filemanager": "^1.7"
     },
     "require-dev": {
-        "fzaninotto/faker": "~1.4",
+        "composer/composer": "^2.0",
+        "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "~9.5"
     },
     "autoload": {
         "classmap": [

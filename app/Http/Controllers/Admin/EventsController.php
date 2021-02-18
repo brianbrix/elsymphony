@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreEventsRequest;
 use App\Http\Requests\Admin\UpdateEventsRequest;
-
+use Illuminate\Support\Str;
 class EventsController extends Controller
 {
     /**
@@ -51,7 +51,22 @@ class EventsController extends Controller
         if (! Gate::allows('event_create')) {
             return abort(401);
         }
+        $imageName = $request->file;
+        $new_name = "";
+        if($imageName!=null)
+        {
+            // get the extension
+            $extension = $imageName->getClientOriginalExtension();
+            // create a new file name
+            $new_name = date( 'Y-m-d' ) . '-' . Str::random(10) . '.' . $extension;
+            // move file to public/images/new and use $new_name
+            $imageName->move( public_path('images/new'), $new_name);
+        }
+
+
+
         $event = Event::create($request->all());
+        $event->update(array("image_path"=>"images/new/".$new_name));
 
 
 

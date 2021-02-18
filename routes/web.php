@@ -1,28 +1,34 @@
+
 <?php
+use Illuminate\Support\Facades\Route;
 // Route::get('/', function () { return redirect('/admin/home'); });
 
-$this->get('/', 'Guest\EventsController@index')->name('guest.home');
+Route::get('/', 'Guest\EventsController@index')->name('guest.home');
+Route::get('pagination/fetch_data', 'Guest\EventsController@fetch_data');
+// Route::get('/home', 'Guest\EventsController@index')->name('guest.home2');
+Route::get('about', 'Guest\EventsController@about')->name('guest.about');
+Route::get('playlist', 'Guest\EventsController@playlist')->name('guest.playlist');
 
 //$this->get('events', 'Guest\EventsController@index')->name('events.index');
 //$this->get('events/{event}', 'Guest\EventsController@show')->name('events.show');
-$this->resource('events', 'Guest\EventsController');
+Route::resource('events', 'Guest\EventsController');
 
-$this->post('payment', 'Guest\PaymentsController@store')->name('guest.payment');
+Route::post('payment', 'Guest\PaymentsController@store')->name('guest.payment');
 
 // Authentication Routes...
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-$this->post('login', 'Auth\LoginController@login')->name('auth.login');
-$this->post('logout', 'Auth\LoginController@logout')->name('auth.logout');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('user.login');
+Route::post('login', 'Auth\LoginController@login')->name('auth.login');
+Route::post('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 // Change Password Routes...
-$this->get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
-$this->patch('change_password', 'Auth\ChangePasswordController@changePassword')->name('auth.change_password');
+Route::get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_passwordview');
+Route::patch('change_password', 'Auth\ChangePasswordController@changePassword')->name('auth.change_password');
 
 // Password Reset Routes...
-$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password.reset');
-$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('auth.password.reset');
-$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-$this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password.resetview');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('auth.password.reset');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset1');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
