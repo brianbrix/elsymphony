@@ -13,14 +13,23 @@ use App\Http\Requests\Admin\UpdateEventsRequest;
 
 class EventsController extends Controller
 {
+
+    public function __construct() {
+
+        $this->middleware('auth', ['only' => ['show', 'store', 'create', 'edit', 'update', 'destroy']]);
+
+
+        }
     /**
      * Display the Home page.
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
-        $events =Event::simplePaginate(1);
+        $events = Event::simplePaginate(1);
 
         return view('guest.index', compact('events'));
     }
@@ -84,6 +93,6 @@ class EventsController extends Controller
 
         $event = Event::findOrFail($id);
 
-        return view('guest.events.show', compact('event', 'tickets'));
+        return view('guest.attend', compact('event', 'tickets'));
     }
 }

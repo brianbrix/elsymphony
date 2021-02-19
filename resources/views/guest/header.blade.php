@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- basic -->
     <meta charset="utf-8">
@@ -54,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10">
+                    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
                         <div class="menu-area">
                             <div class="limit-box">
                                 <nav class="main-menu">
@@ -63,24 +62,27 @@
                                         <li> <a href="{{url('playlist')}}">playlist</a> </li>
                                         <li> <a href="{{url('about')}}">about</a> </li>
                                         <li> <a href="album.html"> Albums</a> </li>
-                                        <li> <a href="Events">Blog</a> </li>
-                                        <li> <a href="{{url('login')}}">Login</a> </li>
+                                        <li> <a href="{{url('/')}}#events">Events</a> </li>
+                                        <li> <a href="{{route('tickets.index')}}">Tickets</a> </li>
+                                        @if(!Auth::user())
+                                        <li> <a href="{{url('account')}}">Account</a> </li>
+                                        @else
+                                        <li>  <a href="#logout" onclick="$('#logout').submit();">Logout</a> </li>
+                                        @endif
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                        <form class="search">
-                            <input class="form-control" type="text" placeholder="Search">
-                            <button><img src="{{url('home/images/search_icon.png')}}"></button>
-                        </form>
-                    </div>
+
                 </div>
             </div>
             <!-- end header inner -->
     </header>
     <!-- end header -->
+    {!! Form::open(['route' => 'auth.logout', 'style' => 'display:none;', 'id' => 'logout']) !!}
+    <button type="submit">Logout</button>
+    {!! Form::close() !!}
 
 @yield('content')
      <!--  footer -->
@@ -92,9 +94,9 @@
                         <div class="address">
                             <h3>Contact Us</h3>
                             <ul class="locarion_icon">
-                                <li><img src="icon/1.png" alt="icon" />104 New York , USA</li>
-                                <li><img src="icon/2.png" alt="icon" />Phone : ( +71 5896547 )</li>
-                                <li><img src="icon/3.png" alt="icon" />Email : demo@email.com</li>
+                                <li><img src="{{url('home/icon/1.png')}}" alt="icon" />100 Nairobi , Kenya</li>
+                                <li><img src="{{url('home/icon/2.png')}}" alt="icon" />Phone : ( +71 5896547 )</li>
+                                <li><img src="{{url('home/icon/3.png')}}" alt="icon" />Email : elsymphonyke@gmail.com</li>
 
                             </ul>
 

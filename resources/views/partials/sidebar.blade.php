@@ -30,6 +30,15 @@
                 </a>
             </li>
             @endcan
+
+            @can('booking_access')
+                <li class="{{ $request->segment(2) == 'bookings' ? 'active' : '' }}">
+                    <a href="{{ route('admin.bookings.index') }}">
+                        <i class="fa fa-gears"></i>
+                        <span class="title">@lang('quickadmin.bookings.title')</span>
+                    </a>
+                </li>
+                @endcan
             
             @can('payment_access')
             <li class="{{ $request->segment(2) == 'payments' ? 'active' : '' }}">

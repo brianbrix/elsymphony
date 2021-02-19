@@ -78,7 +78,7 @@ Elsymphony
 
     <!-- Download -->
     <div id="screenshot" class="Lastestnews">
-        <div class="container">
+        <div class="container" id="events">
             <div class="row">
                 <div class="col-md-12">
                     <div class="titlepage">

@@ -177,12 +177,99 @@ a {
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
     <div class="card card0 border-0">
         <div class="row d-flex">
-            <div class="col-lg-6">
-                <div class="card1 pb-5">
-                    <div class="row"> <img src="https://i.imgur.com/CXQmsmF.png" class="logo"> </div>
-                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="{{url('home/images/el.jpg')}}" class="image"> </div>
-                </div>
-            </div>
+          <div class="col-lg-6">
+              <div class="card2 card border-0 px-4 py-5">
+                  <div class="row mb-4 px-3">
+                      <h6 class="mb-0 mr-4 mt-2">Sign up with</h6>
+                      <div class="facebook text-center mr-3">
+                          <div class="fa fa-facebook"></div>
+                      </div>
+                      <div class="twitter text-center mr-3">
+                          <div class="fa fa-twitter"></div>
+                      </div>
+                      <div class="linkedin text-center mr-3">
+                          <div class="fa fa-linkedin"></div>
+                      </div>
+                  </div>
+                  <div class="row px-3 mb-4">
+                      <div class="line"></div> <small class="or text-center">Or</small>
+                      <div class="line"></div>
+
+                  </div>
+                  <form class="form-horizontal"
+                                        role="form"
+                                        method="POST"
+                                        action="{{ url('register') }}">
+                                        <input type="hidden"
+                                                                       name="_token"
+                                                                       value="{{ csrf_token() }}">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                            <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control input-sm" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="last_name" value="{{ old('last_name') }}" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email" value="{{ old('email') }}" id="password" class="form-control input-sm" placeholder="email@example.com">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                        <input type="text" name="phone_number" value="{{ old('phone_number') }}" id="phone_number" class="form-control input-sm" placeholder="07xx....">
+
+                                        </div>
+
+                                    </div>
+                                    @error('email')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                </div>
+
+                            <div class="form-group">
+                                  <textarea name="physical_address" value="{{ old('physical_address') }}" id="physical Address" class="form-control input-sm" placeholder="Physical address"></textarea>
+                              </div>
+
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control input-sm" placeholder="Retype password">
+
+                                    </div>
+
+                                </div>
+                                @error('password')
+                                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                                    @enderror
+                            </div>
+
+                          <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
+
+                        </form>
+                  <div class="row">
+                  <small class="font-weight-bold col-md-6">Already have an account? <a class="text-danger ">Login</a></small>
+
+
+                    </div>
+
+
+              </div>
+          </div>
             <div class="col-lg-6">
                 <div class="card2 card border-0 px-4 py-5">
                     <div class="row mb-4 px-3">
@@ -200,17 +287,7 @@ a {
                     <div class="row px-3 mb-4">
                         <div class="line"></div> <small class="or text-center">Or</small>
                         <div class="line"></div>
-                        @if (count($errors) > 0)
-                                                <div class="alert alert-danger">
-                                                    <strong>Whoops!</strong> There were problems with input:
-                                                    <br><br>
-                                                    <ul>
-                                                        @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
+
                     </div>
                     <form class="form-horizontal"
                                               role="form"
@@ -219,12 +296,15 @@ a {
                                               <input type="hidden"
                                                                              name="_token"
                                                                              value="{{ csrf_token() }}">
-                    <div class="row px-3"> <label class="mb-1">
-                            <h6 class="mb-0 text-sm">Email Address</h6>
-                        </label> <input class="mb-4" type="text" value="{{ old('email') }}" name="email" placeholder="Enter a valid email address"> </div>
-                    <div class="row px-3"> <label class="mb-1">
-                            <h6 class="mb-0 text-sm">Password</h6>
-                        </label> <input type="password" name="password" placeholder="Enter password"> </div>
+
+
+                       <div class="form-group">
+                       <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control input-sm" placeholder="Email Address">
+                   </div>
+
+                   <div class="form-group">
+                         <input type="password" class="form-control" name="password" placeholder="Enter password">
+                     </div>
                     <div class="row px-3 mb-4">
                         <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                     </div>

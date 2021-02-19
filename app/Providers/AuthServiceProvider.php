@@ -111,6 +111,22 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('payment_view', function ($user) {
             return in_array($user->role_id, [1, 2]);
         });
+        //Auth gates for: Booking
+        Gate::define('booking_view', function ($user) {
+            return in_array($user->role_id, [1,2]);
+        });
+        Gate::define('booking_create', function ($user) {
+            return in_array($user->role_id, [1,2]);
+        });
+        Gate::define('booking_edit', function ($user) {
+            return in_array($user->role_id, [1,2]);
+        });
+        Gate::define('booking_access', function ($user) {
+            return in_array($user->role_id, [1,2]);
+        });
+        Gate::define('booking_delete', function ($user) {
+            return in_array($user->role_id, [1]);
+        });
 
     }
 }

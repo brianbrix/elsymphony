@@ -104,6 +104,20 @@ class EventsController extends Controller
         }
         $event = Event::findOrFail($id);
         $event->update($request->all());
+        $imageName = $request->file;
+        $new_name = "";
+        if($imageName!=null)
+        {
+            // get the extension
+            $extension = $imageName->getClientOriginalExtension();
+            // create a new file name
+            $new_name = date( 'Y-m-d' ) . '-' . Str::random(10) . '.' . $extension;
+            // move file to public/images/new and use $new_name
+            $imageName->move( public_path('images/new'), $new_name);
+        }
+         $event->update(array("image_path"=>"images/new/".$new_name));
+
+
 
 
 

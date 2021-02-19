@@ -6,7 +6,7 @@
                         <figure><img src="{{ asset(str_replace(app_path(),'',$event->image_path))}}" alt="img" /></figure>
                         <h3>{{ $event->title }}</h3>
                         <span> {{$event->start_time}}</span><span>Comment</span>
-                        <p><?php echo \Illuminate\Support\Str::limit($event->description, 300, $end='...') ?><a class="btn btn-dark btn-sm" href="">Attend</a></p>
+                        <p><?php echo \Illuminate\Support\Str::limit($event->description, 300, $end='...') ?><a class="btn btn-dark btn-sm" href="{{ route('events.show', $event->id) }}">Attend</a></p>
                     </div>
                 </div>
 
