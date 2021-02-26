@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Guest;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+ use Illuminate\Contracts\Validation\Validator;
 class StoreBookingRequest extends FormRequest
 {
     /**
@@ -31,4 +31,15 @@ class StoreBookingRequest extends FormRequest
             'ticket_quantity' => 'required',
         ];
     }
+     protected function failedValidation(Validator $validator)
+        {
+            if ($this->expectsJson()) {
+                $errors = (new ValidationException($validator))->errors();
+                throw new HttpResponseException(
+                    response()->json(['data' => $errors], 422)
+                );
+            }
+
+            parent::failedValidation($validator);
+        }
 }

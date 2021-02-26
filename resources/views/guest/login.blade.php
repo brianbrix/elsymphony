@@ -177,99 +177,7 @@ a {
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
     <div class="card card0 border-0">
         <div class="row d-flex">
-          <div class="col-lg-6">
-              <div class="card2 card border-0 px-4 py-5">
-                  <div class="row mb-4 px-3">
-                      <h6 class="mb-0 mr-4 mt-2">Sign up with</h6>
-                      <div class="facebook text-center mr-3">
-                          <div class="fa fa-facebook"></div>
-                      </div>
-                      <div class="twitter text-center mr-3">
-                          <div class="fa fa-twitter"></div>
-                      </div>
-                      <div class="linkedin text-center mr-3">
-                          <div class="fa fa-linkedin"></div>
-                      </div>
-                  </div>
-                  <div class="row px-3 mb-4">
-                      <div class="line"></div> <small class="or text-center">Or</small>
-                      <div class="line"></div>
 
-                  </div>
-                  <form class="form-horizontal"
-                                        role="form"
-                                        method="POST"
-                                        action="{{ url('register') }}">
-                                        <input type="hidden"
-                                                                       name="_token"
-                                                                       value="{{ csrf_token() }}">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control input-sm" placeholder="First Name">
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="last_name" value="{{ old('last_name') }}" id="last_name" class="form-control input-sm" placeholder="Last Name">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" name="email" value="{{ old('email') }}" id="password" class="form-control input-sm" placeholder="email@example.com">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6">
-                                        <div class="form-group">
-                                        <input type="text" name="phone_number" value="{{ old('phone_number') }}" id="phone_number" class="form-control input-sm" placeholder="07xx....">
-
-                                        </div>
-
-                                    </div>
-                                    @error('email')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                </div>
-
-                            <div class="form-group">
-                                  <textarea name="physical_address" value="{{ old('physical_address') }}" id="physical Address" class="form-control input-sm" placeholder="Physical address"></textarea>
-                              </div>
-
-
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control input-sm" placeholder="Retype password">
-
-                                    </div>
-
-                                </div>
-                                @error('password')
-                                                                        <div class="alert alert-danger">{{ $message }}</div>
-                                                                    @enderror
-                            </div>
-
-                          <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
-
-                        </form>
-                  <div class="row">
-                  <small class="font-weight-bold col-md-6">Already have an account? <a class="text-danger ">Login</a></small>
-
-
-                    </div>
-
-
-              </div>
-          </div>
             <div class="col-lg-6">
                 <div class="card2 card border-0 px-4 py-5">
                     <div class="row mb-4 px-3">
@@ -299,23 +207,138 @@ a {
 
 
                        <div class="form-group">
-                       <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control input-sm" placeholder="Email Address">
+                       <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control input-sm" placeholder="Email Address" required>
                    </div>
+                   @error('email')
+                         <div class="alert alert-danger">{{ $message }}</div>
+                     @enderror
 
                    <div class="form-group">
-                         <input type="password" class="form-control" name="password" placeholder="Enter password">
+                         <input type="password" class="form-control" name="password" placeholder="Enter password" required>
                      </div>
+                     @error('password')
+                                           <div class="alert alert-danger">{{ $message }}</div>
+                                       @enderror
                     <div class="row px-3 mb-4">
                         <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> <label for="chk1" class="custom-control-label text-sm">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                     </div>
                     <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
                     </form>
                     <div class="row">
-                    <small class="font-weight-bold col-md-6">Don't have an account? <a class="text-danger ">Register</a></small>
+                    <small class="font-weight-bold col-md-6">Dont have an account? <a class="text-danger ">Register</a></small>
                      <small class="font-weight-bold col-md-6"><a class="text-danger "> <a href="{{ route('auth.password.reset') }}">Forgot your password?</a></a></small>
 
 
-</div>
+                    </div>
+                    
+
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card2 card border-0 px-4 py-5">
+                    <div class="row mb-4 px-3">
+                        <h6 class="mb-0 mr-4 mt-2">Sign up with</h6>
+                        <div class="facebook text-center mr-3">
+                            <div class="fa fa-facebook"></div>
+                        </div>
+                        <div class="twitter text-center mr-3">
+                            <div class="fa fa-twitter"></div>
+                        </div>
+                        <div class="linkedin text-center mr-3">
+                            <div class="fa fa-linkedin"></div>
+                        </div>
+                    </div>
+                    <div class="row px-3 mb-4">
+                        <div class="line"></div> <small class="or text-center">Or</small>
+                        <div class="line"></div>
+                        @error('registration')
+                                  <div class="alert alert-success">{{ $message }}</div>
+                              @enderror
+                    </div>
+                    <form class="form-horizontal"
+                                          role="form"
+                                          method="POST"
+                                          action="{{ url('register') }}">
+                                          <input type="hidden"
+                                                         name="_token"
+                                                         value="{{ csrf_token() }}">
+                              <div class="row">
+                                  <div class="col-xs-6 col-sm-6 col-md-6">
+                                      <div class="form-group">
+                              <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control input-sm" placeholder="First Name" required>
+                                      </div>
+                                       @error('first_name')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+
+                                  </div>
+
+                                  <div class="col-xs-6 col-sm-6 col-md-6">
+                                      <div class="form-group">
+                                          <input type="text" name="last_name" value="{{ old('last_name') }}" id="last_name" class="form-control input-sm" placeholder="Last Name" required >
+                                      </div>
+                                       @error('last_name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                  </div>
+                              </div>
+
+
+                              <div class="row">
+                                      <div class="col-xs-6 col-sm-6 col-md-6">
+                                          <div class="form-group">
+                                              <input type="email" name="user_email" value="{{ old('user_email') }}" id="password" class="form-control input-sm" placeholder="email@example.com" required>
+                                          </div>
+                                          @error('user_email')
+                                                  <div class="alert alert-danger">{{ $message }}</div>
+                                              @enderror
+                                      </div>
+
+                                      <div class="col-xs-6 col-sm-6 col-md-6">
+                                          <div class="form-group">
+                                          <input type="text" name="phone_number" value="{{ old('phone_number') }}" id="phone_number" class="form-control input-sm" placeholder="07xx...." required>
+
+                                          </div>
+                                          @error('phone_number')
+                                                  <div class="alert alert-danger">{{ $message }}</div>
+                                              @enderror
+
+                                      </div>
+
+                                  </div>
+
+                              <div class="form-group">
+                                    <textarea name="physical_address" value="{{ old('physical_address') }}" id="physical Address" class="form-control input-sm" placeholder="Physical address" ></textarea>
+                                </div>
+
+
+                              <div class="row">
+                                  <div class="col-xs-6 col-sm-6 col-md-6">
+                                      <div class="form-group">
+                                          <input type="password" name="user_password" id="user_password" class="form-control input-sm" placeholder="Password" required>
+                                      </div>
+                                  </div>
+                                  <div class="col-xs-6 col-sm-6 col-md-6">
+                                      <div class="form-group">
+                                      <input type="password" name="confirm_password" id="confirm_password" class="form-control input-sm" placeholder="Retype password"required>
+
+                                      </div>
+
+                                  </div>
+                                  @error('user_password')
+                                              <div class="alert alert-danger">{{ $message }}</div>
+                                          @enderror
+                              </div>
+
+                            <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
+
+                          </form>
+                    <div class="row">
+                    <small class="font-weight-bold col-md-6">Already have an account? <a class="text-danger ">Login</a></small>
+
+
+                      </div>
 
 
                 </div>

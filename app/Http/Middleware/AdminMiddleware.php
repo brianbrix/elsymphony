@@ -18,6 +18,10 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         $user = Auth::user();
+        if(!$user)
+        {
+        return redirect->route('account');
+        }
                 if($user->role->id!=1)
                 {
                     //you can throw a 401 unauthorized error here instead of redirecting back

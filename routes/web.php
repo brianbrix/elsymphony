@@ -18,7 +18,7 @@ Route::post('payment', 'Guest\PaymentsController@store')->name('guest.payment');
 // Authentication Routes...
 Route::get('account', 'Auth\LoginController@showLoginForm')->name('user.login');
 Route::post('login', 'Auth\LoginController@login')->name('auth.login');
-Route::post('register', 'Auth\LoginController@doRegister')->name('register');
+Route::post('register', 'Auth\RegisterController@create')->name('register');
 Route::post('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 // Change Password Routes...
@@ -32,6 +32,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset1');
 Route::group(['middleware' => ['auth']], function () {
 Route::resource('tickets', 'Guest\BookingController');
+Route::get('tickets/confirm/{id}/{confirmed}', 'Guest\BookingController@confirm')->name('confirm-ticket');
 });
 Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');

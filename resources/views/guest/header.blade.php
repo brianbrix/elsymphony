@@ -22,6 +22,7 @@
     <link rel="icon" href="images/fevicon.png" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="{{url('home/css/jquery.mCustomScrollbar.min.css')}}">
+    <link rel="stylesheet" href="{{url('home/css/banner.css')}}">
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
@@ -29,6 +30,7 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
 </head>
 <!-- body -->
 
@@ -48,7 +50,7 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="{{url('/')}}"><img src="{{url('home/images/logo.jpg')}}" alt="logo" /></a>
+                                    <a href="{{url('/')}}"><img src="{{url('home/images/logof.png')}}" alt="logo" style="height:82px; width:168px;"/></a>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +157,8 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2019 All Rights Reserved. <a href="https://html.design/">Free html Templates</a></p>
+                <p class="footer-company">All Rights Reserved. &copy; <script>document.write(new Date().getFullYear())</script> <a href="{{url('/')}}">Elsymphony Ke. </a>Developed by :
+                           <a href="https://uptechpay.com">Uptech Payouts</a></p>
             </div>
         </div>
     </footr>
@@ -165,11 +168,14 @@
     <script src="{{url('home/js/popper.min.js')}}"></script>
     <script src="{{url('home/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{url('home/js/jquery-3.0.0.min.js')}}"></script>
-    <script src="js/plugin.js"></script>
+
+    <script src="{{url('home/js/banner.js')}}"></script>
     <!-- sidebar -->
     <script src="{{url('home/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
     <script src="{{url('home/js/custom.js')}}"></script>
     <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+     <script src="{{url('home/js/plugin.js')}}"></script>
     <script>
         $(document).ready(function() {
             $(".fancybox").fancybox({

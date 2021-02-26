@@ -29,7 +29,7 @@ class EventsController extends Controller
 
     public function index()
     {
-        $events = Event::simplePaginate(1);
+        $events = Event::simplePaginate(3);
 
         return view('guest.index', compact('events'));
     }
@@ -41,6 +41,7 @@ class EventsController extends Controller
     return view('guest.events', compact('events'))->render();
     }
     }
+
 
 //     public function login()
 //      {

@@ -3,52 +3,111 @@
 Elsymphony
 @endsection
 @section('content')
-    <section class="banner_section">
-        <div class="banner-main">
-            <img src="{{url('home/images/image.jpg')}}"  style="height: 800px; width: 1920px;"/>
-            <div class="container">
+<style>
 
-                <div class="text-bg relative1">
-                    <h1>Elsymphony<br><span class="Perfect">Acapella Group</span><br>Amazing Harmony</h1>
-                    <p>We make music out of sound. </p>
-                    <a href="{{url('playlist')}}">Download Music</a>
+.tit{
+
+color:white;
+}
+.tit {
+  position: relative;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 10s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+
+</style>
+    <section class="banner_section header">
+       <div class="container-fluid my-1">
+           <div id="carouselExample1" class="carousel slide z-depth-1-half" data-ride="carousel">
+             <div class="carousel-inner">
+               <div class="carousel-item active">
+                 <img class="d-block w-100" src="{{url('home/images/rsz_image1.jpg')}}" alt="First slide">
+                   <div class="carousel-caption">
+                     <h1 class="display-1 tit">Elsymphony Kenya</h1>
+                      <small>
+                     <a class="btn btn-warning btn-lg" href="{{url('playlist')}}">Playlist</a>
+                      </small>
+                   </div>
+               </div>
+               <div class="carousel-item">
+                 <img class="d-block w-100" src="{{url('home/images/rsz_ban.jpg')}}" alt="Second slide">
+                 <div class="carousel-caption">
+                  <h1 class="display-2 tit">Transforming sound to music</h1>
+                   <small>
+                  <a class="btn btn-warning btn-lg" href="{{url('playlist')}}">Playlist</a>
+                   </small>
+                </div>
+               </div>
+               <div class="carousel-item">
+                 <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(47).jpg" alt="Third slide">
+                 <div class="carousel-caption">
+                  <h1 class="display-3 tit">For the creator of the heavens and earth</h1>
+                   <small>
+                  <a class="btn btn-warning btn-lg" href="{{url('playlist')}}">Playlist</a>
+                   </small>
                 </div>
 
-            </div>
-        </div>
+               </div>
+             </div>
+             <a class="carousel-control-prev" href="#carouselExample1" role="button" data-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="sr-only">Previous</span>
+             </a>
+             <a class="carousel-control-next" href="#carouselExample1" role="button" data-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="sr-only">Next</span>
+             </a>
+           </div>
 
     </section>
 
     <!-- music-box  -->
-    <div class="music-box">
+    <div class="music-box" style="margin-top:">
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="for-box">
                         <i><img src="{{url('home/icon/icon1.png')}}" alt="icon"/></i>
-                        <h3>Custom Player</h3>
-                        <p>t is a long established fact that a reader will be distracted by the readable </p>
+                        <h3>Music for praise</h3>
+                        <p>Our music is all about praising our Lord Jesus </p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="for-box">
                         <i><img src="{{url('home/icon/icon2.png')}}" alt="icon"/></i>
-                        <h3>Easy customize</h3>
-                        <p>t is a long established fact that a reader will be distracted by the readable </p>
+                        <h3>Authentic Music</h3>
+                        <p>Our music is authentic, written by ourselves. </p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="for-box">
                         <i><img src="{{url('home/icon/icon3.png')}}" alt="icon"/></i>
                         <h3>Music Playlist</h3>
-                        <p>t is a long established fact that a reader will be distracted by the readable </p>
+                        <p>Our playlist is unending. Support us by downloading our music. </p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                     <div class="for-box">
                         <i><img src="{{url('home/icon/icon4.png')}}" alt="icon"/></i>
-                        <h3>Custom Gallery</h3>
-                        <p>t is a long established fact that a reader will be distracted by the readable </p>
+                        <h3>Elsymphony Events</h3>
+                        <p>We have events like concerts, singspirations, sermons, homecomings. e.t.c More news on this website. </p>
                     </div>
                 </div>
             </div>

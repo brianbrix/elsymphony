@@ -53,11 +53,14 @@ public function __construct()
                     return abort(401);
                 }
          $ticket = Ticket::findOrFail($request["ticket_type"]);
+//          dd($ticket);
         $request["amount"]=$request["ticket_quantity"]*$ticket->price;
         $request["ticket_number"]='ELS-'.strtoupper(uniqid());
 //         $request["ticket_number"]='ELS-'.strtoupper(uniqid());
          $booking = Booking::create($request->all());
-         return redirect()->back()->with('message', 'You have booked your ticket successfully. Please wait for the team for further instructions.');
+//          return redirect()->back()->withErrors('message', '');
+// dd($booking);
+         return redirect('/tickets')->withErrors(['registration' => ['You have booked your ticket successfully. Please wait for the team for further instructions.']]);
     }
 
     /**
@@ -151,3 +154,4 @@ public function __construct()
         }
 
 }
+

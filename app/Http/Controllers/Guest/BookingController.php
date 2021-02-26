@@ -51,7 +51,7 @@ class BookingController extends Controller
         $request["ticket_number"]='ELS-'.strtoupper(uniqid());
 //         $request["ticket_number"]='ELS-'.strtoupper(uniqid());
          $booking = Booking::create($request->all());
-         return redirect()->back()->with('message', 'You have booked your ticket successfully. Please wait for the team for further instructions.');
+         return redirect('/tickets')->withErrors(['registration' => ['You have booked your ticket successfully. Please wait for the team for further instructions.']]);
     }
 
     /**
@@ -98,5 +98,18 @@ class BookingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function confirm($id, $confirm)
+    {
+    $b=Booking::findOrFail($id);
+    if($confirm == 1)
+    {
+    return view('guest.confirm')->with('ticket',$b);
+    }
+    elseif($confirm == 0)
+    {
+    return view('guest.no_confirmed')->with('ticket',$b);
+    }
     }
 }

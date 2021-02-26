@@ -6,7 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use App\Http\Requests\Guest\StoreUserRequest;
 class RegisterController extends Controller
 {
     /*
@@ -60,12 +60,25 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create(StoreUserRequest $data)
     {
-        return User::create([
+    $u= User::where('email',$data['user_email'])->first();
+    if(!empty($u))
+        {
+//         Session::flash('warning', 'A user with tha email already exists. Login to continue.');
+        return back()->withErrors(['user_email' => ['The email is already registered. Please login to continue.']]);
+        }
+        $user=User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'email' => $data['user_email'],
+            'password' => bcrypt($data['user_password']),
+            'role_id' => 1,
+            'first_name' => $data["first_name"],
+            'last_name' => $data["last_name"],
+            'physical_address' => $data["physical_address"],
+            'phone_number' => $data["phone_number"],
         ]);
+        return back()->withErrors(['registration' => ['You successfully registered. Please login to continue.']]);
     }
+
 }

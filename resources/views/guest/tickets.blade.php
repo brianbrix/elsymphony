@@ -3,14 +3,9 @@
 Elsymphony
 @endsection
 @section('content')
+@if(count($bookings)>0)
 <style>
-body {
-    color: #000;
-    overflow-x: hidden;
-    height: 100%;
-    background-color: #B0BEC5;
-    background-repeat: no-repeat
-}
+
 
 .card0 {
     box-shadow: 0px 4px 8px 0px #757575;
@@ -21,7 +16,7 @@ body {
     margin: 0px 40px
 }
 
-.logo {
+.logo2 {
     width: 200px;
     height: 100px;
     margin-top: 20px;
@@ -38,7 +33,7 @@ body {
 }
 
 @media screen and (max-width: 991px) {
-    .logo {
+    .logo2 {
         margin-left: 0px
     }
 
@@ -152,6 +147,9 @@ a {
 
 
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+@error('registration')
+                       <div class="alert alert-success">{{ $message }}</div>
+                   @enderror
     <div class="card card0 border-0">
         <div class="row d-flex">
 
@@ -162,16 +160,25 @@ a {
                         <div class="line"></div> <small class="or text-center">Ticket Details</small>
                         <div class="line"></div>
                         <div class="container">
-                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                        <table class='table table-bordered table-condensed table-striped table-hover'>
-                        <tr><th>Ticket Number</th><th>Booked Date</th><th>Event</th></tr>
-                        @if(count($bookings)>0)
-                        @foreach($bookings as $booking)
 
-                          <tr class="table-row{{$booking->id}}"data-href="http://tutorialsplane.com"><td>{{$booking->ticket_number}}</td><td>{{$booking->created_at}}</td><td>{{$booking->event->title}}</td></tr>
+                        <div class="alert alert-primary">Click on a ticket to view and print it</div>
+                        <a href="#btnPrint" id="cli"></a>
+                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <table class='table table-bordered table-condensed table-striped table-hover' id="myTable" style="cursor: pointer;">
+                        <tr><th>Ticket Number</th><th>Booked Date</th><th>Event</th></tr>
+
+                        @foreach($bookings as $booking)
+                          <tr class="table-row{{$booking->id}}"data-href=""><td>{{$booking->ticket_number}}</td><td>{{$booking->created_at}}</td><td>{{$booking->event->title}}</td></tr>
                           <script>
 
                           $(document).ready(function(){
+                            if({{$bookings[0]->confirmed}}==1){
+                            $("#btnPrint").show();
+                            $('#cli')[0].click();
+                         }
+                         else{
+                            $("#btnPrint").hide();
+                         }
                           $("#start_time").html("{{ $bookings[0]->event->start_time}}");
                           $("#title").html("{{ $bookings[0]->event->title}}");
                           $("#image").attr('src', "{{ asset(str_replace(app_path(),'',$bookings[0]->event->image_path))}}");
@@ -185,6 +192,26 @@ a {
                           $(".dt").html("<?php echo date('d M Y', strtotime($booking->event->start_time)) ?>");
 
                          $(".table-row{{$booking->id}}").click(function() {
+                         if({{$booking->confirmed}}==1){
+                            $("#btnPrint").show();
+                            $('#cli')[0].click();
+                         }
+                         else{
+                            $("#btnPrint").hide();
+                         }
+                          /* JS comes here */
+                              var qr;
+
+
+                              (function() {
+                                     qr = new QRious({
+                                     element: document.getElementById('qr-code'),
+                                     size: 100,
+                                     value: "{{url('tickets/confirm/'.$booking->id.'/'.$booking->confirmed)}}"
+                                 });
+                                     })();
+//                           $(this).addClass('active').siblings().removeClass('active');
+                          $(this).css("background-color", "#888895").siblings().removeAttr('style');
                         $("#start_time").html("{{ $booking->event->start_time}}");
                         $("#title").html("{{ $booking->event->title}}");
                         $("#which_ticket").val("{{ $booking->id}}");
@@ -195,14 +222,18 @@ a {
                         $(".dt").html("<?php echo date('d M Y', strtotime($booking->event->start_time)) ?>");
                         $("#image").attr('src', "{{ asset(str_replace(app_path(),'',$booking->event->image_path))}}");
                         $("#description").html("<?php echo $booking->event->description ?>");
+                        $("#printf").click();
+
                             });
                           });
+
                           </script>
 
                           @endforeach
-                          @endif
+
 
                         </table>
+
                         </div>
 
                     </div>
@@ -212,7 +243,7 @@ a {
         </div>
         <div class="col-lg-6">
             <div class="card1 pb-5">
-                <div class="row"> <div class="col-md-6"><img src="" id='image' class="logo"> </div><div class="col-md-6 mt-5"> <h3 id="title"></h3></div> </div>
+                <div class="row"> <div class="col-md-6"><img src="" id='image' class="logo2"> </div><div class="col-md-6 mt-5"> <h3 id="title"></h3></div> </div>
 
                  <div class="row px-3 justify-content-center mt-1 ml-3 mb-5 border-line">
                      <p id="start_time"> </p>
@@ -230,12 +261,15 @@ a {
                             <script>
                               /* JS comes here */
                               var qr;
+
+
+
                               (function() {
 
                                              qr = new QRious({
                                              element: document.getElementById('qr-code'),
                                              size: 100,
-                                             value: "{{route('tickets.index')}}"
+                                             value: "{{url('tickets/confirm/'.$bookings[0]->id.'/'.$bookings[0]->confirmed)}}"
                                          });
                                      })();
 
@@ -290,20 +324,20 @@ a {
                    </div>
                  </div>
 
-              <button id="btnPrint">save div as pdf</button>
 
-
-
+<button class="btn btn-primary btn-lg" id="btnPrint">PRINT TICKET</button>
 
             </div>
         </div>
 
     </div>
+
 </div>
 </div>
+ @endif
 @endsection
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 <script language="javascript">

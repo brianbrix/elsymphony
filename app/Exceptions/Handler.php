@@ -6,7 +6,7 @@ use Illuminate\Support\Reflector;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
+use Illuminate\Validation\ValidationException as ValidationException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -101,7 +101,8 @@ class Handler extends ExceptionHandler
         } elseif ($e instanceof AuthenticationException) {
             return $this->unauthenticated($request, $e);
         } elseif ($e instanceof ValidationException) {
-            return $this->convertValidationExceptionToResponse($e, $request);
+//                 return response()->json(['message' => 'YOUR CUSTOM MESSAGE HERE', 'errors' => $e->validator->getMessageBag()], 422);
+                return redirect()->back()->with(['message'=>'Invalid data given'], 422)->withErrors($e->validator)->withInput();
         }
 
         return $request->expectsJson()
