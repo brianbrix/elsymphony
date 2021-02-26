@@ -11,10 +11,10 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped {{ !empty($ticket) > 0 ? 'datatable' : '' }} ">
                         <tr>
                             <th>@lang('quickadmin.tickets.fields.event')</th>
-                            <td>{{ $ticket->event->title or '' }}</td>
+                            <td>{{ $ticket->event->title  }}</td>
                         </tr>
                         <tr>
                             <th>@lang('quickadmin.tickets.fields.title')</th>

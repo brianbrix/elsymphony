@@ -60,7 +60,7 @@ public function __construct()
          $booking = Booking::create($request->all());
 //          return redirect()->back()->withErrors('message', '');
 // dd($booking);
-         return redirect('/tickets')->withErrors(['registration' => ['You have booked your ticket successfully. Please wait for the team for further instructions.']]);
+//          return redirect('/tickets')->withErrors(['registration' => ['You have booked your ticket successfully. Please wait for the team for further instructions.']]);
     }
 
     /**

@@ -254,7 +254,7 @@ a {
                                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <label>Ticket Type</label>
                                                             <div class="form-group">
-                                                               <select class="form-control" name="ticket_type" id="ticket_type">
+                                                               <select class="form-control" name="ticket_type" id="ticket_type" required>
                                                                @if(count($tickets)>0)
                                                                @foreach($tickets as $ticket)
                                                                <option value="{{$ticket->id}}" data-id="{{$ticket->price}}">{{$ticket->title}} (Ksh {{$ticket->price}})</option>
@@ -264,6 +264,12 @@ a {
 
                                                             </div>
                                                         </div>
+                                                        <style>
+                                                        .nice-select
+                                                        {
+                                                        display:none;
+                                                        }
+                                                        </style>
                                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                                         <label>Number of tickets</label>
                                                             <div class="form-group">
@@ -285,7 +291,7 @@ a {
                     			    				</div>
                     			    				<div class="col-xs-6 col-sm-6 col-md-6">
                     			    					<div class="form-group">
-                    			    					<input type="text" name="mpesa_code" id="password" class="form-control input-sm" placeholder="MPESA Code">
+                    			    					<input type="text" name="mpesa_code" id="password" class="form-control input-sm" placeholder="MPESA Code" required>
 
                     			    					</div>
                     			    				</div>

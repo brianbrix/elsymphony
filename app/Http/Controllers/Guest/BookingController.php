@@ -47,10 +47,14 @@ class BookingController extends Controller
                     return abort(401);
                 }
          $ticket = Ticket::findOrFail($request["ticket_type"]);
+         if($ticket->amount<=0)
+         {
+         return back()->withErrors(['no_tickets' => ['This type of tickets is not available. Please contact admin for help.']]);
+         }
         $request["amount"]=$request["ticket_quantity"]*$ticket->price;
         $request["ticket_number"]='ELS-'.strtoupper(uniqid());
-//         $request["ticket_number"]='ELS-'.strtoupper(uniqid());
          $booking = Booking::create($request->all());
+         $ticket->decrement('amount', $request["ticket_quantity"]);
          return redirect('/tickets')->withErrors(['registration' => ['You have booked your ticket successfully. Please wait for the team for further instructions.']]);
     }
 

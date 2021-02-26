@@ -168,6 +168,7 @@ a {
                         <tr><th>Ticket Number</th><th>Booked Date</th><th>Event</th></tr>
 
                         @foreach($bookings as $booking)
+
                           <tr class="table-row{{$booking->id}}"data-href=""><td>{{$booking->ticket_number}}</td><td>{{$booking->created_at}}</td><td>{{$booking->event->title}}</td></tr>
                           <script>
 
